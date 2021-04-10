@@ -292,7 +292,7 @@ public class Parser {
       }
       break;
 
-      case Token.PUT:
+      case Token.CHOOSE:
       {
         acceptIt();
         Vname vAST = parseVname();

@@ -20,6 +20,7 @@ import Triangle.StdEnvironment;
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public final class Checker implements Visitor {
+  private Object TypeDenoter;
 
   // Commands
 
@@ -89,16 +90,42 @@ public final class Checker implements Visitor {
     return null;
   }
 
-  public Object VisitRunCommand(RunCommand ast, Object O) {
-    return null;
+  public Object VisitRunCommand(RunCommand ast, Object obj) {
+    TypeDenoter eType = (TypeDenoter) ast.I.visit(this, null);
+    if (! eType.equals(StdEnvironment.integerType))
+      reporter.reportError("Integer literal expected here","", ast.I.position);
+    ast.C.visit(this, null);
+    return  null;
   }
 
-  public Object VisitPutCommand(PutCommand putCommand, Object o) {
-    return null;
+
+  public Object VisitPutCommand(PutCommand ast, Object o) {
+    TypeDenoter eType = (TypeDenoter) ast.V.visit(this, null);
+    if (! eType.equals(StdEnvironment.integerType))
+      reporter.reportError("Integer literal expected here","", ast.V.position);
+
+    if (! eType.equals(StdEnvironment.integerType))
+      reporter.reportError("Integer literal expected here","", ast.E.position);
+
+    if (! eType.equals(StdEnvironment.integerType))
+      reporter.reportError("Integer literal expected here","", ast.E2.position);
+    return  null;
   }
+
+
 
   public Object VisitForCommand(ForCommand ast, Object o) {
-    return null;
+    TypeDenoter eType = (TypeDenoter) ast.V.visit(this, null);
+    if (! eType.equals(StdEnvironment.integerType))
+      reporter.reportError("Integer literal expected here","", ast.V.position);
+
+    if (! eType.equals(StdEnvironment.integerType))
+      reporter.reportError("Integer literal expected here","", ast.I.position);
+
+    if (! eType.equals(StdEnvironment.integerType))
+      reporter.reportError("Integer literal expected here","", ast.I2.position);
+    ast.C.visit(this, null);
+    return  null;
   }
 
 
