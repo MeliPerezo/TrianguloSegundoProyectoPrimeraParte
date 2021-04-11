@@ -1,0 +1,5 @@
+let var i: Integer
+in begin
+run 3
+times i := 4;
+end

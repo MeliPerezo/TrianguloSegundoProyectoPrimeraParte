@@ -1,0 +1,5 @@
+let var i: Integer
+in begin
+for i from 0 to 5 do
+        i := i +1
+    end
